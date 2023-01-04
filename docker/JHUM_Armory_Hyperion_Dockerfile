@@ -3,6 +3,7 @@
 # A Dockerfile for running K2 (snowfall) armory experiments 
 # Author: jesus villalba <jvillal7@jhu.edu>
 #         Yiwen Shao <yshao18@jhu.edu>
+#         Thomas Thebaud <tthebau1@jh.edu>
 
 # Built using:
 # framework=k2-icefall

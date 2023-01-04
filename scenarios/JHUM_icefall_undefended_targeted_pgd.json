@@ -76,7 +76,7 @@
     "sysconfig": {
         "docker_image": "yshao1995/armory-k2-icefall:0.15.3",
             "external_github_repo": [
-                "gard-clsp/asr-submission-jun2022"
+                "gard-clsp/january-2023-submission"
             ],
         "gpus": "all",
         "local_repo_path": null,

@@ -22,6 +22,7 @@ export ARMORY_GITHUB_TOKEN=$1
 echo "run k2 icefall undefended targeted pgd"
 armory run --check $extra_args scenarios/JHUM_icefall_undefended_targeted_pgd.json
 
+exit
 echo "***************************************************************"
 echo "run k2 icefall undefended entailment"
 armory run --check $extra_args scenarios/JHUM_icefall_undefended_targeted_entailment.json
