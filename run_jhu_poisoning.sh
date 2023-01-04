@@ -7,7 +7,7 @@
 set -e
 
 # [WARNING!]: Change these to excecute only particular systems; otherwise it will run all systems
-stage=7
+stage=10
 stop_stage=100
 
 # Set-up paths and labels
@@ -141,29 +141,8 @@ if [ $stage -le 6 ] && [ $stop_stage -gt 6 ]; then
     ) &
 fi
 
-
-# JHU ResNet50 baseline with DINO Clustering filtering defence
+# Defense using DINO_Clustering with fraction_poisoned=0.1; with tensorflow baseline 
 if [ $stage -le 7 ] && [ $stop_stage -gt 7 ]; then
-  exp_dir=exp/poisoning_output/jhu_filtering
-  label0=${cfg_label}_audio_p10_dino_clustering_filter_pytorch
-  label=${label0}
-  output_dir=$exp_dir/$label
-  mkdir -p $output_dir/log
-  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
-  echo "running exp $label"
-    (
-      $cmd $output_dir/log/output.log \
-           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
-           --armory-opts "$armory_opts" \
-           $output_dir/config.json
-      local/retrieve_result.sh $output_dir
-    ) &
-fi
-
-exit
-
-# Defense using DINO_Clustering with fraction_poisoned=0.1; with tensorflow baseline
-if [ $stage -le 5 ] && [ $stop_stage -gt 5 ]; then
   exp_dir=exp/poisoning_output/jhu_defences
   defense_subdir=jhu_filtering
   label0=${cfg_label}_audio_p10_dino_clustering_filter
@@ -180,3 +159,104 @@ if [ $stage -le 5 ] && [ $stop_stage -gt 5 ]; then
       local/retrieve_result.sh $output_dir
     ) &
 fi
+
+# JHU ResNet50 baseline with DINO Clustering filtering defence 
+# DINO trained using 50% data, Clustering: KMeans
+if [ $stage -le 8 ] && [ $stop_stage -gt 8 ]; then
+  exp_dir=exp/poisoning_output/jhu_filtering
+  label0=${cfg_label}_audio_p10_dino_clustering_filter_pytorch
+  label=${label0}
+  output_dir=$exp_dir/$label
+  mkdir -p $output_dir/log
+  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
+  echo "running exp $label"
+    (
+      $cmd $output_dir/log/output.log \
+           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
+           --armory-opts "$armory_opts" \
+           $output_dir/config.json
+      local/retrieve_result.sh $output_dir
+    ) &
+fi
+
+# JHU ResNet50 baseline with DINO Clustering filtering defence
+# DINO trained with 100% data, Clustering: KMeans
+if [ $stage -le 9 ] && [ $stop_stage -gt 9 ]; then
+  exp_dir=exp/poisoning_output/jhu_filtering
+  label0=${cfg_label}_audio_p10_dino_clustering_filter_pytorch_v2
+  label=${label0}
+  output_dir=$exp_dir/$label
+  mkdir -p $output_dir/log
+  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
+  echo "running exp $label"
+    (
+      $cmd $output_dir/log/output.log \
+           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
+           --armory-opts "$armory_opts" \
+           $output_dir/config.json
+      local/retrieve_result.sh $output_dir
+    ) &
+fi
+
+# JHU ResNet50 baseline with DINO Clustering filtering defence
+# DINO trained with 100% data, Clustering: KMeans + OneClass
+# Keep only one class by maximum amount of flagged files
+if [ $stage -le 10 ] && [ $stop_stage -gt 10 ]; then
+  exp_dir=exp/poisoning_output/jhu_filtering
+  label0=${cfg_label}_audio_p10_dino_clustering_OneClass_filter_pytorch_v2
+  label=${label0}
+  output_dir=$exp_dir/$label
+  mkdir -p $output_dir/log
+  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
+  echo "running exp $label"
+    (
+      $cmd $output_dir/log/output.log \
+           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
+           --armory-opts "$armory_opts" \
+           $output_dir/config.json
+      local/retrieve_result.sh $output_dir
+    ) &
+fi
+
+exit
+
+# JHU ResNet50 baseline with DINO Clustering filtering defence
+# DINO trained with 100% data, Clustering: KMeans+LDA
+if [ $stage -le 11 ] && [ $stop_stage -gt 11 ]; then
+  exp_dir=exp/poisoning_output/jhu_filtering
+  label0=${cfg_label}_audio_p10_dino_clustering_withLDA_filter_pytorch
+  label=${label0}
+  output_dir=$exp_dir/$label
+  mkdir -p $output_dir/log
+  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
+  echo "running exp $label"
+    (
+      $cmd $output_dir/log/output.log \
+           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
+           --armory-opts "$armory_opts" \
+           $output_dir/config.json
+      local/retrieve_result.sh $output_dir
+    ) &
+fi
+
+
+# JHU ResNet50 baseline with DINO Clustering filtering defence
+# DINO trained with 100% data, Clustering: KMeans+LDA + OneClass
+# Keep only one class by maximum amount of flagged files
+if [ $stage -le 12 ] && [ $stop_stage -gt 12 ]; then
+  exp_dir=exp/poisoning_output/jhu_filtering
+  label0=${cfg_label}_audio_p10_dino_clustering_withLDA_OneClass_filter_pytorch
+  label=${label0}
+  output_dir=$exp_dir/$label
+  mkdir -p $output_dir/log
+  cp $scenario_config_dir/jhu_filtering/$label0.json $output_dir/config.json
+  echo "running exp $label"
+    (
+      $cmd $output_dir/log/output.log \
+           utils/armory_clsp_poisoning.sh --ncpu $ncpu --ngpu $ngpu \
+           --armory-opts "$armory_opts" \
+           $output_dir/config.json
+      local/retrieve_result.sh $output_dir
+    ) &
+fi
+

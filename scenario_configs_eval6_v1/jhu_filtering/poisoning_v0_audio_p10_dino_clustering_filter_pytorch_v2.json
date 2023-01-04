@@ -2,7 +2,6 @@
     "_description": "Speech Commands DLBD poison audio classification",
     "adhoc": {
         "compute_fairness_metrics": false,
-        "path_to_index_file": "/export/b17/tthebau1/GARD_DINOrepr_train50/data_to_keep.pkl",
         "experiment_id": 0,
         "explanatory_model": null,
         "fraction_poisoned": 0.1,
@@ -38,9 +37,10 @@
     "defense": {
         "kwargs": {
             "clustering_method": "KMeans",
-            "nb_clusters": 1000
+            "nb_clusters": 1000,
+            "path_to_index_file" : "/export/b17/tthebau1/GARD_DINOrepr_train100/data_to_keep_first_round.pkl"
         },
-        "module": "local.defences",
+        "module": "local.defences.dino_filtering_defense",
         "name": "DinoClusteringDefense",
         "type": "PoisonFilteringDefence"
     },
@@ -49,7 +49,7 @@
         "fit": true,
         "fit_kwargs": {},
         "model_kwargs": {},
-        "module": "armory.baseline_models.tf_graph.audio_resnet50",
+        "module": "local.models.audio_resnet50_torch",
         "name": "get_art_model",
         "weights_file": null,
         "wrapper_kwargs": {}
