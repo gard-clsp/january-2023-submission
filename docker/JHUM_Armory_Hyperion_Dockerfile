@@ -109,3 +109,11 @@ RUN /opt/conda/bin/pip install transformers
 
 WORKDIR /workspace
 CMD tail -f /dev/null
+
+########## Musan download #################
+
+RUN mkdir /workspace/poison_dump
+
+# TODO add smarter musan download
+#RUN wget https://us.openslr.org/resources/17/musan.tar.gz && \
+#   tar -xzvf musan.tar.gz
