@@ -1,0 +1,6 @@
+denoiser_root_dir=/export/c06/skataria/models/ASR-1/adv-pgd-denoiser3/
+denoiser_model_ckpt=epoch-11.pt
+denoiser_label=BWE-1_111_Adv-ASRFrozen_epoch11
+denoiser_white=true
+
+@Yiwen, please rename this as model as `JHUM_adv_denoiser`

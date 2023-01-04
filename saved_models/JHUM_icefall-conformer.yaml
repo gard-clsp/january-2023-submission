@@ -1,0 +1,15 @@
+lang_dir: JHUM_k2_icefall_lang_bpe
+num_features: 80
+sampling_rate: 16000
+subsampling_factor: 4
+model:
+    nhead: 8
+    attention_dim: 512
+    num_decoder_layers: 6
+    vgg_frontend: false
+    use_feat_batchnorm: true
+    causal: true
+checkpoint:
+    dir: JHUM_icefall-conformer
+    model_name: trained_streaming_conformer.pt
+

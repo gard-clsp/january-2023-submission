@@ -1,0 +1,106 @@
+########## ARMORY Base #################
+
+# A Dockerfile for running K2 (snowfall) armory experiments 
+# Author: jesus villalba <jvillal7@jhu.edu>
+#         Yiwen Shao <yshao18@jhu.edu>
+
+# Built using:
+# framework=k2-icefall
+# version=0.15.3
+# docker build --force-rm --file docker/JHUM_Armory_K2_Snowfall_Dockerfile --build-arg armory_version=${version} --target armory-${framework} -t yshao1995/armory-${framework}:${version} .
+
+FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04 AS armory
+
+# Temporary fix for broken nvidia package checksum
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list
+
+RUN apt-get -y -qq update && \
+    apt-get install -y wget vim build-essential git curl cmake
+
+# Install Conda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    /opt/conda/bin/conda clean -tipsy && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc && \
+    echo 'alias ll="ls -al"' >> ~/.bashrc
+
+ENV PATH=/opt/conda/bin:$PATH
+
+RUN /opt/conda/bin/pip install --no-cache-dir \
+    tensorflow-datasets==4.5.1 \
+    jupyterlab==3.0.9 \
+    boto3==1.17.20 \
+    Pillow==8.2.0 \
+    pydub==0.24.1 \
+    apache-beam==2.22.0 \
+    dill==0.3.1.1 \
+    pytest==6.2.2 \
+    pandas==1.2.4 \
+    ffmpeg-python==0.2.0
+
+
+RUN /opt/conda/bin/conda install -c conda-forge ffmpeg==4.2.3 && \
+    /opt/conda/bin/conda clean --all
+
+WORKDIR /workspace
+
+
+########## K2 Base #################
+
+ARG armory_version
+FROM armory AS armory-k2-base
+
+ENV NUMBA_CACHE_DIR /tmp
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda/lib64"
+
+RUN /opt/conda/bin/conda install pytorch==1.7.1 \
+  torchaudio==0.7.2 \
+  cudatoolkit=10.2 -c pytorch && \
+    /opt/conda/bin/conda clean --all
+
+RUN /opt/conda/bin/conda install -c conda-forge librosa 
+RUN /opt/conda/bin/pip install hydra-core==1.0.6 \
+  tensorflow-gpu==2.8.1 \
+  python-levenshtein \
+  numba==0.53.1 \
+  --ignore-installed llvmlite==0.36.0 \
+  soundfile \
+  sox \
+  adversarial-robustness-toolbox==1.10.3 --no-cache-dir
+
+# Install k2
+# RUN /opt/conda/bin/conda install \
+#     -c k2-fsa -c pytorch -c conda-forge \
+#     k2 python=3.7 cudatoolkit=10.2 pytorch=1.10.0
+
+ENV LD_LIBRARY_PATH="/opt/conda/lib:${LD_LIBRARY_PATH}"
+RUN /opt/conda/bin/pip install k2==1.11.dev20211209+cuda10.2.torch1.7.1 -f https://k2-fsa.org/nightly/
+
+# Install kaldilm with conda, with pip fails
+RUN /opt/conda/bin/conda install \
+    -c k2-fsa -c conda-forge kaldilm==1.8
+
+## Install icefall
+RUN git clone https://github.com/YiwenShaoStephen/icefall.git /icefall && \
+    cd /icefall && \
+    git checkout gard && \
+    /opt/conda/bin/pip install -r requirements.txt
+
+ENV PYTHONPATH="/icefall:/icefall/egs/librispeech/ASR/streaming_conformer_ctc:${PYTHONPATH}"
+
+RUN /opt/conda/bin/pip install --no-cache-dir parallel_wavegan
+
+########## K2 Release #################
+
+FROM armory-k2-base as armory-k2-icefall
+ARG armory_version
+
+RUN /opt/conda/bin/pip install armory-testbed==${armory_version} --no-cache-dir
+RUN /opt/conda/bin/pip install transformers
+
+WORKDIR /workspace
+CMD tail -f /dev/null

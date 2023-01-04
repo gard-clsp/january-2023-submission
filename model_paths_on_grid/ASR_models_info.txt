@@ -1,0 +1,13 @@
+SNOWFALL
+
+Name for docker: JHUM_snowfall-conformer-noam-mmi-att-musan-sa-vgg-epoch20-avg5.yaml
+Path on grid: /export/c23/pzelasko/exp-conformer-noam-mmi-att-musan-sa-vgg
+
+
+ICEFALL
+
+Name for docker: JHUM_icefall-conformer
+                 JHUM_trained_streaming_conformer.pt
+Path on grid: 
+    dir: /export/b06/yshao/icefall/egs/librispeech/ASR/streaming_conformer/streaming_models
+    model_name: /export/b06/yshao/icefall/egs/librispeech/ASR/streaming_conformer/streaming_models/trained_streaming_conformer.pt
