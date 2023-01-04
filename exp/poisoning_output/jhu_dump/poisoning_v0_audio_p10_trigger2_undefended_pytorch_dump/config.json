@@ -16,8 +16,7 @@
         "knowledge": "black",
         "kwargs": {
             "backdoor_kwargs": {
-                "backdoor_path": 
-                "/Volumes/Macintosh_HD-Data/Documents/GARD/january-2023-submission/whistle.wav",
+                "backdoor_path": "/export/b10/sjoshi/codes/gard-speech/egs-clsp/eval-poisoning-GoogleSpeechCommands/v0/armory_attack_trigger_wav/whistle.wav",
                 "duration": 1,
                 "random": false,
                 "sampling_rate": 16000,
@@ -41,7 +40,7 @@
         "fit": true,
         "fit_kwargs": {},
         "model_kwargs": {
-            "dump_path": "/workspace/poison_dump"
+            "dump_path": "/export/b17/xli257/test"
         },
         "module": "local.models.dump",
         "name": "get_art_model",
@@ -54,13 +53,12 @@
         "name": "Poison"
     },
     "sysconfig": {
-        "docker_image": "yshao1995/armory-k2-icefall:0.15.3",
+        "docker_image": "twosixarmory/pytorch",
         "external_github_repo": null,
         "gpus": "all",
         "output_dir": null,
         "output_filename": null,
         "set_pythonhashseed": true,
-        "use_gpu": false
+        "use_gpu": true
     }
 }
-

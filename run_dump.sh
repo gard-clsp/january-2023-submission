@@ -16,7 +16,7 @@ scenario_config_dir=scenario_configs_eval6_v1/jhu_dump
 baseline_defense_subdir=baseline_defense
 
 ncpu=1
-ngpu=1
+ngpu=0
 armory_opts=""
 
 . utils/parse_options.sh || exit 1
