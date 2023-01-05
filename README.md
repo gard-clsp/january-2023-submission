@@ -48,3 +48,9 @@ $ armory run scenarios/JHUM_icefall_undefended_targeted_entailment.json
 # Or just check quickly that it works okay.
 $ armory run --check scenarios/JHUM_icefall_undefended_targeted_entailment.json
 ```
+
+#### Dumping Training Data
+
+$ ./run_dump.sh
+
+For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.

@@ -3,8 +3,6 @@
 #                2020   Johns Hopkins University (Author: Jesus Villalba, Sonal Joshi)
 # Apache 2.0.
 #
-. ./cmd.sh
-set -e
 
 # [WARNING!]: Change these to excecute only particular systems; otherwise it will run all systems
 stage=1
@@ -21,14 +19,12 @@ armory_opts=""
 
 . utils/parse_options.sh || exit 1
 
-if [ $ngpu -eq 0 ]; then
-    cmd="$cpu_cmd --num-threads $ncpu"
+if [ $ngpu -eq 0 ];then
+    export CUDA_VISIBLE_DEVICES=""
+    extra_args="--no-gpu"
 else
-    cmd="$cuda_cmd -l gpu=$ngpu --num-threads $ncpu"
+    export CUDA_VISIBLE_DEVICES=1
 fi
-
-# echo "GPU reserve command is..."
-# echo $cmd
 
 # Undefended poisoning attacked baseline : fraction_poisoned=0.1
 if [ $stage -le 1 ] && [ $stop_stage -gt 1 ]; then
@@ -38,12 +34,5 @@ if [ $stage -le 1 ] && [ $stop_stage -gt 1 ]; then
   output_dir=$exp_dir/$label
   mkdir -p $output_dir/log
   cp $scenario_config_dir/$label0.json $output_dir/config.json
-  echo "running exp $label"
-    (
-      $cmd $output_dir/log/output.log \
-           utils/armory_clsp_poisoning_dump.sh --ncpu $ncpu --ngpu $ngpu \
-           --armory-opts "$armory_opts" \
-           $output_dir/config.json
-      local/retrieve_result.sh $output_dir
-    ) &
+  armory run --check $extra_args $output_dir/config.json
 fi
