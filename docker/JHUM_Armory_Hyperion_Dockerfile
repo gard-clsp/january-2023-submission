@@ -7,7 +7,7 @@
 
 # Built using:
 # framework=k2-icefall
-# version=0.15.3
+# version=0.16.0
 # docker build --force-rm --file docker/JHUM_Armory_K2_Snowfall_Dockerfile --build-arg armory_version=${version} --target armory-${framework} -t yshao1995/armory-${framework}:${version} .
 
 FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04 AS armory
@@ -41,7 +41,8 @@ RUN /opt/conda/bin/pip install --no-cache-dir \
     dill==0.3.1.1 \
     pytest==6.2.2 \
     pandas==1.2.4 \
-    ffmpeg-python==0.2.0
+    ffmpeg-python==0.2.0 \
+    tidecv==1.0.1
 
 
 RUN /opt/conda/bin/conda install -c conda-forge ffmpeg==4.2.3 && \
