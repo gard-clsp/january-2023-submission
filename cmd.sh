@@ -22,7 +22,7 @@ else
     #export cuda_eval_cmd="$train_cmd"
     #export cpu_cmd="utils/queue.pl --mem 16G -l hostname=\"[bc][01]*\""
     #export cuda_cmd="utils/queue.pl --mem 16G -l hostname=\"b1[123456789]|c[01]*\""
-    #export cpu_cmd="utils/retry.pl utils/queue.pl --mem 8G -l hostname=\"[bc][01]*\""
+    export cpu_cmd="utils/queue.pl --mem 8G -l hostname=\"[bc][01]*\""
     #export cuda_cmd="utils/retry.pl utils/queue.pl --mem 8G -l hostname=\"b1[123456789]|c[01]*\""
     #export cuda_cmd="utils/retry.pl utils/queue.pl --mem 40G -l hostname=\"b1[123456789]|c[01]*\""
     export cuda_cmd="utils/retry.pl utils/queue.pl --mem 16G -l hostname=\"b1[123456789]|c[01]*\""

@@ -54,7 +54,7 @@
         "name": "Poison"
     },
     "sysconfig": {
-        "docker_image": "yshao1995/armory-k2-icefall:0.15.3",
+        "docker_image": "yshao1995/armory-k2-icefall:0.16.0",
         "external_github_repo": null,
         "gpus": "all",
         "output_dir": null,

@@ -35,4 +35,5 @@ if [ $stage -le 1 ] && [ $stop_stage -gt 1 ]; then
   mkdir -p $output_dir/log
   cp $scenario_config_dir/$label0.json $output_dir/config.json
   armory run --check $extra_args $output_dir/config.json
+
 fi
