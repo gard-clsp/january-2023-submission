@@ -44,6 +44,7 @@ if [ $stage -le 1 ] && [ $stop_stage -gt 1 ]; then
            utils/armory_clsp_poisoning_dump.sh --ncpu $ncpu --ngpu $ngpu \
            --armory-opts "$armory_opts" \
            $output_dir/config.json
+      echo "it worked"
       local/retrieve_result.sh $output_dir
     ) &
 fi

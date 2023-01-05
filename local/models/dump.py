@@ -12,7 +12,7 @@ import tensorflow as tf
 
 from .pytorch_dump import PyTorchDumper
 
-device = torch.device('cuda')
+device = torch.device('cpu')
 window = torch.tensor(tf.signal.hann_window(255).numpy()).to(device = device)
 
 params = [
