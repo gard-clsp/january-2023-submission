@@ -22,14 +22,14 @@ $ pip install armory-testbed==0.16.0
 ```
 
 
-### Running scenarios
+## Running scenarios
 
-#### Dumping data
+### Dumping data
 First we must create the poisoned dataset and dump it in the docker:
 ```bash
 $ .run_dump_docker.sh
 ```
-#### filter the poisoned examples
+### filter the poisoned examples
 Then, in the docker, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
@@ -49,7 +49,7 @@ $ cd /hyperion/egs/poison/dinossl.v1
 $ .RUN_ALL.sh /workspace/poison_dump scenario2 /workspace/musan
 ```
 
-#### run the evaluation
+### run the evaluation
 Finally, once we have the list of poisoned samples, run the evaluation:
 ```bash
 $ TODO
