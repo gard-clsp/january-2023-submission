@@ -39,7 +39,9 @@ This will use the data in */workspace/poison_dump*, augmented with the musan noi
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
 The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
 
-As the training takes 25 to 30 hours, if you wish to use a previously trained network, you can put it in 
+As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here: 
+https://drive.google.com/file/d/1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ/view?usp=sharing 
+download it and put it in here:
 ```bash
 /hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1/
 ```
