@@ -16,7 +16,7 @@
         "knowledge": "black",
         "kwargs": {
             "backdoor_kwargs": {
-                "backdoor_path": "/export/b10/sjoshi/codes/gard-speech/egs-clsp/eval-poisoning-GoogleSpeechCommands/v0/armory_attack_trigger_wav/whistle.wav",
+                "backdoor_path": "whistle.wav",
                 "duration": 1,
                 "random": false,
                 "sampling_rate": 16000,
@@ -40,7 +40,7 @@
         "fit": true,
         "fit_kwargs": {},
         "model_kwargs": {
-            "dump_path": "/export/b17/xli257/test"
+            "dump_path": "dump_dir"
         },
         "module": "local.models.dump",
         "name": "get_art_model",

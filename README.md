@@ -23,12 +23,12 @@ $ pip install armory-testbed==0.16.0
 
 
 ## Running scenarios
+### Dumping Training Data
 
-### Dumping data
-First we must create the poisoned dataset and dump it in the docker:
-```bash
-$ .run_dump_docker.sh
-```
+$ ./run_dump.sh
+
+For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.
+
 ### filter the poisoned examples
 Then, in the docker, run the filtering of the poisoned examples:
 ```bash
@@ -56,5 +56,3 @@ Finally, once we have the list of poisoned samples, run the evaluation:
 ```bash
 $ TODO
 ```
-
-
