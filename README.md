@@ -1,4 +1,4 @@
-# ASR submission for GARD evaluation (June 2022)
+# ASR submission for GARD evaluation (January 2023)
 
 This repo contains the code and scenarios for the evaluation.
 
@@ -18,39 +18,41 @@ $  export ARMORY_GITHUB_TOKEN=...
 ### Installing armory
 
 ```bash
-$ pip install armory-testbed==0.15.3
-```
-
-### Obtaining models
-
-Copy the models in your host machine in
-```
-~/.armory/saved_models
-```
-
-List of needed files in ```saved_models```
-```
-JHUM_adv_denoiser.tar.gz
-JHUM_k2_conformer-noam-mmi-att-musan-sa-vgg.tar.gz
-JHUM_icefall-conformer.tar.gz
-JHUM_k2_icefall_lang_bpe.tar.gz
-JHUM_k2_lang_nosp.tar.gz
-JHUM_icefall-conformer.yaml
-JHUM_snowfall-conformer-noam-mmi-att-musan-sa-vgg-epoch20-avg5.yaml
+$ pip install armory-testbed==0.16.0
 ```
 
 
-### Running scenarios
-
-```bash
-# Run the full evaluation.
-$ armory run scenarios/JHUM_icefall_undefended_targeted_entailment.json
-# Or just check quickly that it works okay.
-$ armory run --check scenarios/JHUM_icefall_undefended_targeted_entailment.json
-```
-
-#### Dumping Training Data
+## Running scenarios
+### Dumping Training Data
 
 $ ./run_dump.sh
 
 For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.
+
+### filter the poisoned examples
+Then, in the docker, run the filtering of the poisoned examples:
+```bash
+$ cd /hyperion/egs/poison/dinossl.v1
+$ .RUN_ALL.sh /workspace/poison_dump scenario1 /workspace/musan retrain
+```
+This will use the data in */workspace/poison_dump*, augmented with the musan noise in */workspace/musan*,
+to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
+The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
+
+As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here: 
+https://drive.google.com/file/d/1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ/view?usp=sharing 
+download it and put it in here:
+```bash
+/hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1/
+```
+and run this instead, it will ignore the training of the network :
+```bash
+$ cd /hyperion/egs/poison/dinossl.v1
+$ .RUN_ALL.sh /workspace/poison_dump scenario2 /workspace/musan
+```
+
+### run the evaluation
+Finally, once we have the list of poisoned samples, run the evaluation:
+```bash
+$ TODO
+```
