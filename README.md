@@ -21,6 +21,18 @@ $  export ARMORY_GITHUB_TOKEN=...
 $ pip install armory-testbed==0.16.0
 ```
 
+### Downloading noise dataset MUSAN
+If you want to download musan for every instance, uncomment the last two lines of docker/JHUM_Armory_Hyperion_Dockerfile
+If you already have it in a direction in MUSAN_PATH/musan, then build the docker and after that use :
+
+```bash
+$ docker cp MUSAN_PATH/musan CONTAINER_NAME:/workspace/
+```
+### Building the docker
+To build the docker you are gonna use, launch :
+```bash
+$ ./build_docker.sh
+```
 
 ## Running scenarios
 ### Dumping Training Data
@@ -37,7 +49,7 @@ $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
 Then, in the docker, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ .RUN_ALL.sh /workspace/dump_dir scenario1 /workspace/musan retrain
+$ ./RUN_ALL.sh /workspace/dump_dir scenario1 /workspace/musan retrain
 ```
 This will use the data in */workspace/dump_dir*, augmented with the musan noise in */workspace/musan*,
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
