@@ -33,9 +33,9 @@ For custom dump path, set the model.model_kwargs.dump_path option in the scenari
 Then, in the docker, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ .RUN_ALL.sh /workspace/poison_dump scenario1 /workspace/musan retrain
+$ .RUN_ALL.sh /workspace/dump_dir scenario1 /workspace/musan retrain
 ```
-This will use the data in */workspace/poison_dump*, augmented with the musan noise in */workspace/musan*,
+This will use the data in */workspace/dump_dir*, augmented with the musan noise in */workspace/musan*,
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
 The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
 
@@ -48,7 +48,7 @@ download it and put it in here:
 and run this instead, it will ignore the training of the network :
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ .RUN_ALL.sh /workspace/poison_dump scenario2 /workspace/musan
+$ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan
 ```
 
 ### run the evaluation

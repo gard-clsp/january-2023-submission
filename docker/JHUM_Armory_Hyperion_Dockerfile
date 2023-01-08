@@ -113,7 +113,7 @@ CMD tail -f /dev/null
 
 ########## Musan download #################
 
-RUN mkdir /workspace/poison_dump
+RUN mkdir /workspace/dump_dir
 
 # TODO add smarter musan download
 #RUN wget https://us.openslr.org/resources/17/musan.tar.gz && \
