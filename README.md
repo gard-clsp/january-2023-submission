@@ -29,6 +29,10 @@ $ ./run_dump.sh
 
 For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.
 
+Once the dump has been performed, use the following command to move the dumped files into the docker of your choice:
+
+$ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
+
 ### filter the poisoned examples
 Then, in the docker, run the filtering of the poisoned examples:
 ```bash
@@ -39,8 +43,12 @@ This will use the data in */workspace/poison_dump*, augmented with the musan noi
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
 The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
 
-As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here: 
-https://drive.google.com/file/d/1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ/view?usp=sharing 
+As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here:
+mkdir exp
+mkdir exp/xvector_nnets
+mkdir exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
+pip install gdown
+gdown https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
 download it and put it in here:
 ```bash
 /hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1/
@@ -48,7 +56,7 @@ download it and put it in here:
 and run this instead, it will ignore the training of the network :
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ .RUN_ALL.sh /workspace/poison_dump scenario2 /workspace/musan
+$ bash RUN_ALL.sh /workspace/poison_dump scenario2 /workspace/musan
 ```
 
 ### run the evaluation
