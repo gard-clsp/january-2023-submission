@@ -72,7 +72,8 @@ RUN /opt/conda/bin/pip install hydra-core==1.0.6 \
   --ignore-installed llvmlite==0.36.0 \
   soundfile \
   sox \
-  adversarial-robustness-toolbox==1.10.3 --no-cache-dir
+  adversarial-robustness-toolbox==1.10.3 --no-cache-dir\
+  gdown
 
 # Install k2
 # RUN /opt/conda/bin/conda install \
