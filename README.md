@@ -49,17 +49,18 @@ https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=down
 ```
 You can use this to download it:
 ```bash
-mkdir exp
-mkdir exp/xvector_nnets
-mkdir exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
-cd exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
-gdown https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
+$ cd /hyperion/egs/poison/dinossl.v1
+$ mkdir exp
+$ mkdir exp/xvector_nnets
+$ mkdir exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
+$ cd exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
+$ gdown https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
+$ cd ../../../
 ```
 
 and then, run this instead, it will ignore the training of the network :
 
 ```bash
-$ cd /hyperion/egs/poison/dinossl.v1
 $ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
 ```
 
