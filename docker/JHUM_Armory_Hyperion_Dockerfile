@@ -118,5 +118,5 @@ RUN mkdir /workspace/dump_dir
 
 
 # IF you want to download musan again
-# RUN wget https://us.openslr.org/resources/17/musan.tar.gz
-# RUN tar -xzvf musan.tar.gz
+ RUN wget https://us.openslr.org/resources/17/musan.tar.gz
+ RUN tar -xzvf musan.tar.gz
