@@ -15,7 +15,7 @@ cfg_label=poisoning_v0
 scenario_config_dir=scenario_configs_eval6_v1
 
 ncpu=1
-ngpu=1
+ngpu=0
 armory_opts=""
 
 . utils/parse_options.sh || exit 1

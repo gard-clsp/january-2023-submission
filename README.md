@@ -79,5 +79,6 @@ $ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
 ### run the evaluation
 Finally, once we have the list of poisoned samples, run the evaluation:
 ```bash
-$ ./run_jhu_poisoning.sh scenario1
+conda install -c conda-forge tensorflow
+bash run_jhu_poisoning.sh scenario1
 ```
