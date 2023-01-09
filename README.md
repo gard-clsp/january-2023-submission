@@ -77,8 +77,29 @@ $ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
 ```
 
 ### run the evaluation
-Finally, once we have the list of poisoned samples, run the evaluation:
+Finally, once we have the list of poisoned samples, we can run the evaluation.
+#### Installing the dependencies :
 ```bash
-conda install -c conda-forge tensorflow
-bash run_jhu_poisoning.sh scenario1
+pip install tensorflow adversarial-robustness-toolbox Pillow 
+pip install tensorflow_datasets==4.7.0 
+pip install boto3 
+pip install ffmpeg 
+pip install librosa 
+conda install -c nvidia cuda-cudart 
+conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
+pip install tidecv 
+armory configure
+```
+
+#### Run eval
+
+```bash
+docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA.pkl data_to_keep.pkl
+bash run_jhu_poisoning.sh
+```
+#### Optional :
+If you encounter troubles, you might need to install those librairies also :
+```bash
+apt install libgl1-mesa-glx
+apt-get install gcc
 ```

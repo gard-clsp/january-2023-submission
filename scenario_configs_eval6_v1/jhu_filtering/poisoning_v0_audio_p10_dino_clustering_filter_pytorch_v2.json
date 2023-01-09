@@ -16,7 +16,7 @@
         "knowledge": "black",
         "kwargs": {
             "backdoor_kwargs": {
-                "backdoor_path": "/export/b10/sjoshi/codes/gard-speech/egs-clsp/eval-poisoning-GoogleSpeechCommands/v0/armory_attack_trigger_wav/clapping.wav",
+                "backdoor_path": "whistle.wav",
                 "duration": 1,
                 "random": false,
                 "sampling_rate": 16000,
@@ -38,7 +38,7 @@
         "kwargs": {
             "clustering_method": "KMeans",
             "nb_clusters": 1000,
-            "path_to_index_file" : "/export/b17/tthebau1/GARD_DINOrepr_train100/data_to_keep_first_round.pkl"
+            "path_to_index_file" : "./data_to_keep.pkl"
         },
         "module": "local.defences.dino_filtering_defense",
         "name": "DinoClusteringDefense",

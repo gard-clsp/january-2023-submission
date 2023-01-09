@@ -2,7 +2,7 @@
     "_description": "Speech Commands DLBD poison audio classification",
     "adhoc": {
         "compute_fairness_metrics": false,
-        "path_to_index_file": "/export/b17/tthebau1/GARD_DINOrepr_train50/data_to_keep.pkl",
+        "path_to_index_file": "./data_to_keep.pkl",
         "experiment_id": 0,
         "explanatory_model": null,
         "fraction_poisoned": 0.1,
@@ -17,7 +17,7 @@
         "knowledge": "black",
         "kwargs": {
             "backdoor_kwargs": {
-                "backdoor_path": "/export/b10/sjoshi/codes/gard-speech/egs-clsp/eval-poisoning-GoogleSpeechCommands/v0/armory_attack_trigger_wav/clapping.wav",
+                "backdoor_path": "whistle.wav",
                 "duration": 1,
                 "random": false,
                 "sampling_rate": 16000,

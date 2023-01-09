@@ -33,11 +33,12 @@ export LD_LIBRARY_PATH=/export/c11/sjoshi/miniconda3/envs/armory_Oct22_poisoning
 #export PYTHONPATH=.:$HYP_ROOT:$PYTHONPATH
 
 # Set conda root
-CONDA_ROOT=/export/c11/sjoshi/miniconda3
+CONDA_ROOT=/Users/thomas/miniconda3 #/root/anaconda3
 . $CONDA_ROOT/etc/profile.d/conda.sh
 
 # Activate  conda env for poisoning
-conda activate armory_Oct22_poisoning
+#conda activate armory_Oct22_poisoning
+conda activate dino
 #conda activate armory_Oct22_poisoning_v2
 
 # gpu=$(awk '/use_gpu/ && /true/ { print true}' $cfg)

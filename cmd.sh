@@ -25,7 +25,7 @@ else
     export cpu_cmd="utils/run.pl --mem 8G -l hostname=\"[bc][01]*\""
     #export cuda_cmd="utils/retry.pl utils/queue.pl --mem 8G -l hostname=\"b1[123456789]|c[01]*\""
     #export cuda_cmd="utils/retry.pl utils/queue.pl --mem 40G -l hostname=\"b1[123456789]|c[01]*\""
-    export cuda_cmd="utils/retry.pl utils/queue.pl --mem 16G -l hostname=\"b1[123456789]|c[01]*\""
+    export cuda_cmd="utils/retry.pl utils/run.pl --mem 16G -l hostname=\"b1[123456789]|c[01]*\""
 fi
 
 
