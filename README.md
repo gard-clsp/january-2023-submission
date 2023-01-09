@@ -18,7 +18,7 @@ $  export ARMORY_GITHUB_TOKEN=...
 ### Installing armory
 
 ```bash
-$ pip install armory-testbed==0.16.0
+$ pip install armory-testbed==0.16.2
 ```
 
 ### Downloading noise dataset MUSAN

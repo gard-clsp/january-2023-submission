@@ -7,7 +7,7 @@
 
 # Built using:
 # framework=k2-icefall
-# version=0.16.0
+# version=0.16.2
 # docker build --force-rm --file docker/JHUM_Armory_K2_Snowfall_Dockerfile --build-arg armory_version=${version} --target armory-${framework} -t yshao1995/armory-${framework}:${version} .
 
 FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04 AS armory
