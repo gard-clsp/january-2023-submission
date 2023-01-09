@@ -46,7 +46,7 @@ Once the dump has been performed, use the following command to move the dumped f
 $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
 
 ### filter the poisoned examples
-Then, in the docker, run the filtering of the poisoned examples:
+Then, *in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
 $ ./RUN_ALL.sh /workspace/dump_dir scenario1 /workspace/musan retrain
@@ -79,5 +79,5 @@ $ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
 ### run the evaluation
 Finally, once we have the list of poisoned samples, run the evaluation:
 ```bash
-$ TODO
+$ ./run_jhu_poisoning.sh scenario1
 ```

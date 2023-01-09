@@ -38,7 +38,7 @@
         "kwargs": {
             "clustering_method": "KMeans",
             "nb_clusters": 1000,
-            "path_to_index_file" : "/export/b17/tthebau1/GARD_DINOrepr_train50/data_to_keep.pkl"
+            "path_to_index_file" : "./data_to_keep.pkl"
         },
         "module": "local.defences.dino_filtering_defense",
         "name": "DinoClusteringDefense",

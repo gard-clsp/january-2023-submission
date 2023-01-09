@@ -7,7 +7,7 @@
 set -e
 
 # [WARNING!]: Change these to excecute only particular systems; otherwise it will run all systems
-stage=10
+stage=7
 stop_stage=100
 
 # Set-up paths and labels
@@ -143,6 +143,8 @@ fi
 
 # Defense using DINO_Clustering with fraction_poisoned=0.1; with tensorflow baseline 
 if [ $stage -le 7 ] && [ $stop_stage -gt 7 ]; then
+  scenario=$1
+  docker cp docker/JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/${scenario}_LDA.pkl "./data_to_keep.pkl"
   exp_dir=exp/poisoning_output/jhu_defences
   defense_subdir=jhu_filtering
   label0=${cfg_label}_audio_p10_dino_clustering_filter
