@@ -58,6 +58,9 @@ $ ./build_docker.sh
 
 ## Running scenarios
 
+##  SUBMISSION0 : Baseline Pytorch model
+bash run_jhu_poisoning_submission0.sh
+
 <hr>
 
 ## DEFENSE SUBMISSION1: DINO+KMeans+LDA Filtering defense
