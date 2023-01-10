@@ -1,14 +1,9 @@
 ########## ARMORY Base #################
 
-# A Dockerfile for running K2 (snowfall) armory experiments 
+# A Dockerfile for running armory experiments for audio poisoning (dirty-label scenario)
 # Author: jesus villalba <jvillal7@jhu.edu>
 #         Yiwen Shao <yshao18@jhu.edu>
 #         Thomas Thebaud <tthebau1@jh.edu>
-
-# Built using:
-# framework=k2-icefall
-# version=0.16.2
-# docker build --force-rm --file docker/JHUM_Armory_K2_Snowfall_Dockerfile --build-arg armory_version=${version} --target armory-${framework} -t yshao1995/armory-${framework}:${version} .
 
 FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04 AS armory
 
