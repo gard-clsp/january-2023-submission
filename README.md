@@ -72,7 +72,9 @@ $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
 ```
 
 ###  [Step II] Filter the poisoned examples
-Then, *in the docker*, run the filtering of the poisoned examples:
+This step must be done inside the docker container.
+#### [OPTION A] Retrain the DINO
+*in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
 $ ./RUN_ALL.sh retrain
@@ -81,6 +83,7 @@ This will use the data in */workspace/dump_dir*, augmented with the musan noise 
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
 The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
 
+#### [OPTION B] Load the DINO
 As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here:
 ```bash
 https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
