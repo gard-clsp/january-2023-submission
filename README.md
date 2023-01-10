@@ -83,7 +83,7 @@ Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in
 Once the data dump has been performed, use the following command to move the dumped files into the docker of your choice:
 
 ```
-$ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
+$ docker cp dump_dir/* CONTAINER_NAME:/workspace/dump_dir
 ```
 
 ###  [Step II] Filter the poisoned examples
