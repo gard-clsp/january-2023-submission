@@ -57,8 +57,11 @@ To build the docker you are gonna use, launch :
 $ ./build_docker.sh
 ```
 <hr>
+
 ## Running scenarios
+
 List of scenarios:
+
 |  Scenario      | Description                                                           |
 | -------------- | ----------------------------------------------------------------------|
 | SUBMISSION0    | Baseline Pytorch model (undefended)                                   |
