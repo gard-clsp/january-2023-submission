@@ -54,7 +54,7 @@ $ docker cp MUSAN_PATH/musan CONTAINER_NAME:/workspace/
 ### Building the docker
 To build the docker you are gonna use, launch :
 ```bash
-$ ./build_docker.sh
+$ bash build_docker.sh
 ```
 <hr>
 ## Running scenarios
@@ -75,7 +75,7 @@ List of scenarios:
 ### [Step I] Dumping Training Data
 
 ```
-$ ./run_dump.sh
+$ bash run_dump.sh
 ```
 
 Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in the scenario json file to path you desire.
@@ -94,8 +94,10 @@ There are two options for this step. [OPTION A] will re-train the DINO model fro
 #### [OPTION A] Retrain the DINO model
 *in the docker*, run the filtering of the poisoned examples:
 ```bash
+$ cd /hyperion
+$ printf "/opt/conda\nbase\n" | /hyperion/prepare_egs_paths.sh
 $ cd /hyperion/egs/poison/dinossl.v1
-$ ./RUN_ALL.sh retrain
+$ bash RUN_ALL.sh retrain
 ```
 This will use the data previously dumped in <code>/workspace/dump_dir</code>, and augment with the musan noise in <code>/workspace/musan</code>,
 to train a DINO network in a unsupervised way, produce DINO representations for the train dataset and filter them.
@@ -120,7 +122,7 @@ $ cd ../../../
 and then, run this instead, it will ignore the training of the network :
 
 ```bash
-$ .RUN_ALL.sh no_train
+$ bash RUN_ALL.sh no_train
 ```
 
 ###  [Step III] Run the evaluation
