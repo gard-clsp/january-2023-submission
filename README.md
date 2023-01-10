@@ -128,8 +128,10 @@ bash run_jhu_poisoning_submission1.sh
 ## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
 
 ### [OPTION A] With model training
-bash run_jhu_poisoning_submission2.1.sh
+```bash run_jhu_poisoning_submission2.1.sh```
+Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_v1.json#L42) if the current working directory has changed.
 
 ### [OPTION B] Without model training and loading model
-bash run_jhu_poisoning_submission2.2.sh
+```bash run_jhu_poisoning_submission2.2.sh```
+Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_load_model.json#L42) if the current working directory has changed.
 
