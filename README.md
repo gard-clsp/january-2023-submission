@@ -2,6 +2,7 @@
 
 This repo contains the code and scenarios for the evaluation.
 
+
 ## How to run in Docker
 
 ### First, install Docker app in your host machine, and run it
@@ -55,12 +56,18 @@ To build the docker you are gonna use, launch :
 ```bash
 $ ./build_docker.sh
 ```
-
+<hr>
 ## Running scenarios
+List of scenarios:
+|  Scenario      | Description                                                           |
+| -------------- | ----------------------------------------------------------------------|
+| SUBMISSION0    | Baseline Pytorch model (undefended)                                   |
+| SUBMISSION1    | DINO+KMeans+LDA Filtering defense                                     |
+| SUBMISSION2.1  | Sliding Joint Energy-based Model defense with model training          |
+| SUBMISSION2.2  | Sliding Joint Energy-based Model defense with loading model           |
 
-##  SUBMISSION0 : Baseline Pytorch model
+##  SUBMISSION0 : Baseline Pytorch model (undefended)
 ```bash run_jhu_poisoning_submission0.sh```
-
 <hr>
 
 ## DEFENSE SUBMISSION1: DINO+KMeans+LDA Filtering defense
