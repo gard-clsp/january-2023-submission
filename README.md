@@ -8,17 +8,39 @@ This repo contains the code and scenarios for the evaluation.
 
 ### Setting up API token to download the repo
 
-Enter [GitHub Token settins](https://github.com/settings/tokens) and add a token with the access to private repos.
+Enter [GitHub Token settings](https://github.com/settings/tokens) and add a token with the access to private repos.
 Set `ARMORY_GITHUB_TOKEN` env var with the token's value.
 
 ```bash
 $  export ARMORY_GITHUB_TOKEN=...
 ```
 
-### Installing armory
+### Installations
 
+#### Installing armory
 ```bash
-$ pip install armory-testbed==0.16.2
+$ pip install armory-testbed
+```
+
+#### Installing other dependencies :
+```bash
+pip install tensorflow adversarial-robustness-toolbox Pillow 
+pip install tensorflow_datasets==4.7.0 
+pip install boto3 
+pip install ffmpeg 
+pip install librosa 
+conda install -c nvidia cuda-cudart 
+conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
+pip install tidecv 
+armory configure
+```
+
+
+#### Optional :
+If you encounter troubles, you might need to install those librairies also :
+```bash
+apt install libgl1-mesa-glx
+apt-get install gcc
 ```
 
 ### Downloading noise dataset MUSAN
@@ -35,17 +57,21 @@ $ ./build_docker.sh
 ```
 
 ## Running scenarios
-### Dumping Training Data
+### [Step I] Dumping Training Data
 
+```
 $ ./run_dump.sh
+```
 
 For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.
 
 Once the dump has been performed, use the following command to move the dumped files into the docker of your choice:
 
+```
 $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
+```
 
-### filter the poisoned examples
+###  [Step II] Filter the poisoned examples
 Then, *in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
@@ -76,30 +102,10 @@ and then, run this instead, it will ignore the training of the network :
 $ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
 ```
 
-### run the evaluation
+###  [Step III] Run the evaluation
 Finally, once we have the list of poisoned samples, we can run the evaluation.
-#### Installing the dependencies :
-```bash
-pip install tensorflow adversarial-robustness-toolbox Pillow 
-pip install tensorflow_datasets==4.7.0 
-pip install boto3 
-pip install ffmpeg 
-pip install librosa 
-conda install -c nvidia cuda-cudart 
-conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
-pip install tidecv 
-armory configure
-```
-
-#### Run eval
-
 ```bash
 docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA.pkl data_to_keep.pkl
 bash run_jhu_poisoning.sh
 ```
-#### Optional :
-If you encounter troubles, you might need to install those librairies also :
-```bash
-apt install libgl1-mesa-glx
-apt-get install gcc
-```
+
