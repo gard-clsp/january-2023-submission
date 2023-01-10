@@ -59,7 +59,7 @@ $ ./build_docker.sh
 ## Running scenarios
 
 ##  SUBMISSION0 : Baseline Pytorch model
-bash run_jhu_poisoning_submission0.sh
+```bash run_jhu_poisoning_submission0.sh```
 
 <hr>
 
