@@ -125,8 +125,8 @@ bash run_jhu_poisoning_submission1.sh
 ## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
 
 ### [OPTION A] With model training
-bash run_jhu_poisoning_submission2.1.sh
+```bash run_jhu_poisoning_submission2.1.sh```
 
 ### [OPTION B] Without model training and loading model
-bash run_jhu_poisoning_submission2.2.sh
+```bash run_jhu_poisoning_submission2.2.sh```
 
