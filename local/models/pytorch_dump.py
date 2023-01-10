@@ -25,7 +25,7 @@ import logging
 from typing import Any, List, Optional, Tuple, Union, TYPE_CHECKING
 
 import numpy as np
-import sys
+import sys, os
 
 from art.estimators.classification.pytorch import PyTorchClassifier
 from art.utils import check_and_transform_label_format
@@ -83,6 +83,8 @@ class PyTorchDumper(PyTorchClassifier):
         )
 
         self.dump_path = dump_path
+        if not os.path.exists(dump_path):
+            os.makedirs(dump_path)
         
 
     def fit(  # pylint: disable=W0221
