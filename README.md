@@ -1,4 +1,4 @@
-# ASR submission for GARD evaluation (January 2023)
+# JHU submission for GARD evaluation - Speech Commands Poisoning (Dirty Label) (January 2023)
 
 This repo contains the code and scenarios for the evaluation.
 
