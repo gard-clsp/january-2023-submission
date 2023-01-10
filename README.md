@@ -57,15 +57,18 @@ $ ./build_docker.sh
 ```
 
 ## Running scenarios
+<hr>
+## DEFENSE SUBMISSION1: DINO+KMeans+LDA Filtering defense
+
 ### [Step I] Dumping Training Data
 
 ```
 $ ./run_dump.sh
 ```
 
-For custom dump path, set the model.model_kwargs.dump_path option in the scenario json file.
+Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in the scenario json file to path you desire.
 
-Once the dump has been performed, use the following command to move the dumped files into the docker of your choice:
+Once the data dump has been performed, use the following command to move the dumped files into the docker of your choice:
 
 ```
 $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
@@ -73,17 +76,20 @@ $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
 
 ###  [Step II] Filter the poisoned examples
 This step must be done inside the docker container.
-#### [OPTION A] Retrain the DINO
+
+There are two options for this step. [OPTION A] will re-train the DINO model from scratch, while [OPTION B] will use the model we already trained for the default scenario (10% of source class 11 poisoned with <code>clapping.wav</code> trigger to target class 2)
+
+#### [OPTION A] Retrain the DINO model
 *in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
 $ ./RUN_ALL.sh retrain
 ```
-This will use the data in */workspace/dump_dir*, augmented with the musan noise in */workspace/musan*,
-to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
-The indices will be kept at a pickled list in */workspace/scenario1.pkl* and /workspace/scenario1_LDA.pkl*.
+This will use the data previously dumped in <code>/workspace/dump_dir</code>, and augment with the musan noise in <code>/workspace/musan</code>,
+to train a DINO network in a unsupervised way, produce DINO representations for the train dataset and filter them.
+The indices will be kept at a pickled list in <code>/workspace/scenario1.pkl</code> and <code>/workspace/scenario1_LDA.pkl</code>.
 
-#### [OPTION B] Load the DINO
+#### [OPTION B] Load the DINO model (already trained) to save time
 As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here:
 ```bash
 https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
@@ -111,4 +117,8 @@ Finally, once we have the list of poisoned samples, we can run the evaluation.
 docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA.pkl data_to_keep.pkl
 bash run_jhu_poisoning.sh
 ```
+
+<hr>
+
+## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
 
