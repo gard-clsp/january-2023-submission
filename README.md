@@ -117,10 +117,16 @@ $ .RUN_ALL.sh no_train
 Finally, once we have the list of poisoned samples, we can run the evaluation.
 ```bash
 docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA.pkl data_to_keep.pkl
-bash run_jhu_poisoning.sh
+bash run_jhu_poisoning_submission1.sh
 ```
 
 <hr>
 
 ## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
+
+### [OPTION A] With model training
+bash run_jhu_poisoning_submission2.1.sh
+
+### [OPTION B] Without model training and loading model
+bash run_jhu_poisoning_submission2.2.sh
 
