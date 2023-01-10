@@ -20,5 +20,5 @@ export ARMORY_GITHUB_TOKEN=$1
 
 
 echo "run data dump"
-armory run --check $extra_args scenarios/poisoning_v0_audio_p10_trigger2_undefended_pytorch_dump.json
+armory run --check $extra_args scenario_configs_eval6_v1/jhu_dump/poisoning_v0_audio_p10_trigger2_undefended_pytorch_dump.json
 

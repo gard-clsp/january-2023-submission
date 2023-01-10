@@ -75,7 +75,7 @@ $ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
 Then, *in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ ./RUN_ALL.sh /workspace/dump_dir scenario1 /workspace/musan retrain
+$ ./RUN_ALL.sh retrain
 ```
 This will use the data in */workspace/dump_dir*, augmented with the musan noise in */workspace/musan*,
 to train unsupervisingly a DINO network, produce representations for the dataset and filter them.
@@ -99,7 +99,7 @@ $ cd ../../../
 and then, run this instead, it will ignore the training of the network :
 
 ```bash
-$ .RUN_ALL.sh /workspace/dump_dir scenario2 /workspace/musan no_train
+$ .RUN_ALL.sh no_train
 ```
 
 ###  [Step III] Run the evaluation
