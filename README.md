@@ -57,7 +57,9 @@ $ ./build_docker.sh
 ```
 
 ## Running scenarios
+
 <hr>
+
 ## DEFENSE SUBMISSION1: DINO+KMeans+LDA Filtering defense
 
 ### [Step I] Dumping Training Data
