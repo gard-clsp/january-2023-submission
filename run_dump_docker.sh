@@ -2,9 +2,6 @@
 set -e
 ngpu=0
 ncpu=1
-CONDA_ROOT=/Users/thomas/miniconda3
-. $CONDA_ROOT/etc/profile.d/conda.sh
-conda activate dino
 
 if [ $ngpu -eq 0 ];then
     export CUDA_VISIBLE_DEVICES=""
@@ -20,5 +17,5 @@ export ARMORY_GITHUB_TOKEN=$1
 
 
 echo "run data dump"
-armory run --check $extra_args scenarios/poisoning_v0_audio_p10_trigger2_undefended_pytorch_dump.json
+armory run --check $extra_args scenario_configs_eval6_v1/jhu_dump/poisoning_v0_audio_p10_undefended_pytorch_dump.json
 
