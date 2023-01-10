@@ -2,9 +2,6 @@
 set -e
 ngpu=0
 ncpu=1
-CONDA_ROOT=/Users/thomas/miniconda3
-. $CONDA_ROOT/etc/profile.d/conda.sh
-conda activate dino
 
 if [ $ngpu -eq 0 ];then
     export CUDA_VISIBLE_DEVICES=""
