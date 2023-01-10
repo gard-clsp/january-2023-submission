@@ -16,7 +16,7 @@
         "knowledge": "black",
         "kwargs": {
             "backdoor_kwargs": {
-                "backdoor_path": "whistle.wav",
+                "backdoor_path": "clapping.wav",
                 "duration": 1,
                 "random": false,
                 "sampling_rate": 16000,
@@ -39,11 +39,9 @@
     "model": {
         "fit": true,
         "fit_kwargs": {},
-        "model_kwargs": {
-            "dump_path": "dump_dir"
-        },
-        "module": "local.models.dump",
-        "name": "get_art_model",
+        "model_kwargs": {"variant_path": "scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/variant.json"},
+        "module": "local.models.audio_wrn_torch_jem",
+        "name": "get_model",
         "weights_file": null,
         "wrapper_kwargs": {}
     },
