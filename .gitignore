@@ -4,3 +4,4 @@
 *.tar
 saved_models/*
 exp/*
+armory-upload.md

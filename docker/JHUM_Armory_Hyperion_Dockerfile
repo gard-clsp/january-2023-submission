@@ -103,6 +103,7 @@ ARG armory_version
 
 RUN /opt/conda/bin/pip install armory-testbed --no-cache-dir
 RUN /opt/conda/bin/pip install transformers
+RUN mkdir -p /hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
 
 WORKDIR /workspace
 CMD tail -f /dev/null

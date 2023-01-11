@@ -97,8 +97,6 @@ There are two options for this step. [OPTION A] will re-train the DINO model fro
 #### [OPTION A] Retrain the DINO model
 *in the docker*, run the filtering of the poisoned examples:
 ```bash
-$ cd /hyperion
-$ printf "/opt/conda\nbase\n" | /hyperion/prepare_egs_paths.sh
 $ cd /hyperion/egs/poison/dinossl.v1
 $ bash RUN_ALL.sh retrain
 ```
@@ -113,18 +111,14 @@ https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=down
 ```
 You can use this to download it:
 ```bash
-$ cd /hyperion/egs/poison/dinossl.v1
-$ mkdir exp
-$ mkdir exp/xvector_nnets
-$ mkdir exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
-$ cd exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
+$ cd /hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
 $ gdown https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
-$ cd ../../../
 ```
 
 and then, run this instead, it will ignore the training of the network :
 
 ```bash
+$ cd /hyperion/egs/poison/dinossl.v1
 $ bash RUN_ALL.sh no_train
 ```
 
