@@ -2,6 +2,7 @@
 
 This repo contains the code and scenarios for the evaluation.
 
+
 ## How to run in Docker
 
 ### First, install Docker app in your host machine, and run it
@@ -53,14 +54,23 @@ $ docker cp MUSAN_PATH/musan CONTAINER_NAME:/workspace/
 ### Building the docker
 To build the docker you are gonna use, launch :
 ```bash
-$ ./build_docker.sh
+$ bash build_docker.sh
 ```
+<hr>
 
 ## Running scenarios
 
-##  SUBMISSION0 : Baseline Pytorch model
-bash run_jhu_poisoning_submission0.sh
+List of scenarios:
 
+|  Scenario      | Description                                                           |
+| -------------- | ----------------------------------------------------------------------|
+| SUBMISSION0    | Baseline Pytorch model (undefended)                                   |
+| SUBMISSION1    | DINO+KMeans+LDA Filtering defense                                     |
+| SUBMISSION2.1  | Sliding Joint Energy-based Model defense with model training          |
+| SUBMISSION2.2  | Sliding Joint Energy-based Model defense with loading model           |
+
+##  SUBMISSION0 : Baseline Pytorch model (undefended)
+```bash run_jhu_poisoning_submission0.sh```
 <hr>
 
 ## DEFENSE SUBMISSION1: DINO+KMeans+LDA Filtering defense
@@ -68,7 +78,7 @@ bash run_jhu_poisoning_submission0.sh
 ### [Step I] Dumping Training Data
 
 ```
-$ ./run_dump.sh
+$ bash run_dump.sh
 ```
 
 Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in the scenario json file to path you desire.
@@ -76,7 +86,7 @@ Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in
 Once the data dump has been performed, use the following command to move the dumped files into the docker of your choice:
 
 ```
-$ docker cp dump_dir/* CONTAINER_NAME:/workspace/poison_dump
+$ docker cp dump_dir/* CONTAINER_NAME:/workspace/dump_dir
 ```
 
 ###  [Step II] Filter the poisoned examples
@@ -87,8 +97,10 @@ There are two options for this step. [OPTION A] will re-train the DINO model fro
 #### [OPTION A] Retrain the DINO model
 *in the docker*, run the filtering of the poisoned examples:
 ```bash
+$ cd /hyperion
+$ printf "/opt/conda\nbase\n" | /hyperion/prepare_egs_paths.sh
 $ cd /hyperion/egs/poison/dinossl.v1
-$ ./RUN_ALL.sh retrain
+$ bash RUN_ALL.sh retrain
 ```
 This will use the data previously dumped in <code>/workspace/dump_dir</code>, and augment with the musan noise in <code>/workspace/musan</code>,
 to train a DINO network in a unsupervised way, produce DINO representations for the train dataset and filter them.
@@ -113,7 +125,7 @@ $ cd ../../../
 and then, run this instead, it will ignore the training of the network :
 
 ```bash
-$ .RUN_ALL.sh no_train
+$ bash RUN_ALL.sh no_train
 ```
 
 ###  [Step III] Run the evaluation
@@ -128,8 +140,12 @@ bash run_jhu_poisoning_submission1.sh
 ## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
 
 ### [OPTION A] With model training
-bash run_jhu_poisoning_submission2.1.sh
+```bash run_jhu_poisoning_submission2.1.sh```
+<br>
+Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_v1.json#L42) if the current working directory has changed.
 
 ### [OPTION B] Without model training and loading model
-bash run_jhu_poisoning_submission2.2.sh
+```bash run_jhu_poisoning_submission2.2.sh```
+<br>
+Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_load_model.json#L42) if the current working directory has changed.
 
