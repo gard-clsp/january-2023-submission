@@ -2,7 +2,6 @@
     "_description": "Speech Commands DLBD poison audio classification",
     "adhoc": {
         "compute_fairness_metrics": false,
-        "path_to_index_file": "./data_to_keep.pkl",
         "experiment_id": 0,
         "explanatory_model": null,
         "fraction_poisoned": 0.1,
@@ -11,7 +10,8 @@
         "split_id": 0,
         "target_class": 2,
         "train_epochs": 20,
-        "use_poison_filtering_defense": true
+        "use_poison_filtering_defense": true,
+        "fit_defense_classifier_outside_defense": false
     },
     "attack": {
         "knowledge": "black",
@@ -38,9 +38,10 @@
     "defense": {
         "kwargs": {
             "clustering_method": "KMeans",
-            "nb_clusters": 1000
+            "nb_clusters": 1000,
+            "path_to_index_file": "./data_to_keep.pkl"
         },
-        "module": "local.defences",
+        "module": "local.defences.dino_filtering_defense",
         "name": "DinoClusteringDefense",
         "type": "PoisonFilteringDefence"
     },
@@ -55,9 +56,7 @@
         "wrapper_kwargs": {}
     },
     "scenario": {
-        "kwargs": {
-            "fit_generator": true
-        },
+        "kwargs": {},
         "module": "armory.scenarios.poison",
         "name": "Poison"
     },
