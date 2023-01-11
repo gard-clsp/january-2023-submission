@@ -36,7 +36,7 @@
   "libri_lab_path": "",
   "libri_wavs_path": "",
   "load_path": null,
-  "log_dir": "scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1",
+  "log_dir": "scenario_configs_eval6_v1/jhu_defense_jem_filtering/configs_defense_jem_filtering_v1",
   "lr": 0.0001,
   "mean_path": null,
   "minus_p_y_real": 0.0,

@@ -20,5 +20,5 @@ fi
 
 echo "run eval for Submission2"
 echo "Sliding JEM defense with training"
-armory run $extra_args scenario_configs_eval6_v1/jhu_defense_slidingJEM/JHUM_poisoning_v0_audio_p10_jem_pytorch_v1.json
+armory run $extra_args scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_v1.json
 

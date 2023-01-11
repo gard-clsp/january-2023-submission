@@ -2,7 +2,6 @@
     "_description": "Speech Commands DLBD poison audio classification",
     "adhoc": {
         "compute_fairness_metrics": false,
-        "path_to_index_file": "./data_to_keep.pkl",
         "experiment_id": 0,
         "explanatory_model": null,
         "fraction_poisoned": 0.1,
@@ -11,7 +10,7 @@
         "split_id": 0,
         "target_class": 2,
         "train_epochs": 20,
-        "use_poison_filtering_defense": true
+        "use_poison_filtering_defense": false
     },
     "attack": {
         "knowledge": "black",
@@ -35,29 +34,19 @@
         "name": "speech_commands",
         "pad_data": true
     },
-    "defense": {
-        "kwargs": {
-            "clustering_method": "KMeans",
-            "nb_clusters": 1000
-        },
-        "module": "local.defences",
-        "name": "DinoClusteringDefense",
-        "type": "PoisonFilteringDefence"
-    },
+    "defense": null,
     "metric": null,
     "model": {
         "fit": true,
         "fit_kwargs": {},
-        "model_kwargs": {"variant_path": "scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/variant.json"},
+        "model_kwargs": {"no_train": true, "model_path": "scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/ckpt_26.pt"},
         "module": "local.models.audio_wrn_torch_jem",
         "name": "get_model",
         "weights_file": null,
         "wrapper_kwargs": {}
     },
     "scenario": {
-        "kwargs": {
-            "fit_generator": true
-        },
+        "kwargs": {},
         "module": "armory.scenarios.poison",
         "name": "Poison"
     },
