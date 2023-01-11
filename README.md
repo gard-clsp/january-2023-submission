@@ -78,7 +78,7 @@ List of scenarios:
 ### [Step I] Dumping Training Data
 
 ```
-$ bash run_dump.sh
+$ bash run_dump_docker.sh
 ```
 
 Optional: For custom dump path, set the `model.model_kwargs.dump_path` option in the scenario json file to path you desire.

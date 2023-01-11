@@ -19,5 +19,5 @@ else
 fi
 
 echo "run eval baseline pytorch"
-armory run $extra_args scenario_configs_eval6_v1/jhu_baseline/poisoning_v0_audio_p10_undefended_pytorch.json
+armory run $extra_args scenario_configs_eval6_v1/jhu_baseline/JHUM_poisoning_v0_audio_p10_undefended_pytorch.json
 
