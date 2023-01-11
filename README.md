@@ -132,31 +132,34 @@ bash run_jhu_poisoning_submission1.sh
 <hr>
 
 ## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
-### [OPTION A] Training the model
 
+### [OPTION A] Training the model
 ```bash run_jhu_poisoning_submission2.1.sh```
-<br>
+
+Trained model will be saved to: [scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/ckpt_26.pt](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/ckpt_26.pt) <br>
 Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_v1.json#L42) if the current working directory has changed.
 
 ### [OPTION B] Loading already trained model
+```bash run_jhu_poisoning_submission2.2.sh```
 
 Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
-```bash run_jhu_poisoning_submission2.2.sh```
-<br>
+If you first run [OPTION A], it saves model to the location from where [OPTION B] is loading the model. <br>
 Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_load_model.json#L42) if the current working directory has changed.
 
 
 ## DEFENSE SUBMISSION3: Combination of SUBMISSION1 and SUBMISSION2
-
 This defense applies filtering used in SUBMISSION1 and trains the model from SUBMISSION2. It expects file data_to_keep.pkl. If you didn’t run SUBMISSON1, follow steps until you obtain data_to_keep.pkl.
-### [OPTION A] Training the model
 
+### [OPTION A] Training the model
 ```bash run_jhu_poisoning_submission3.1.sh```
+
+Trained model will be saved to [scenario_configs_eval6_v1/jhu_defense_jem_filtering/configs_defense_jem_filtering_v1/ckpt_26.pt](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/configs_defense_jem_filtering_v1/ckpt_26.pt) 
 <br>
 Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/poisoning_v0_audio_p10_jem_filter.json#L51) if the current working directory has changed.
 
 ### [OPTION B] Loading already trained model
-Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
 ```bash run_jhu_poisoning_submission3.2.sh```
-<br>
+
+Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
+If you first run [OPTION A], it saves model to the location from where [OPTION B] is loading the model. 
 Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/poisoning_v0_audio_p10_jem_filter_load_model.json#L51) if the current working directory has changed.
