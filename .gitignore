@@ -2,3 +2,5 @@
 *.pkl
 *.pth
 *.tar
+saved_models/*
+exp/*
