@@ -2,6 +2,7 @@
     "_description": "Speech Commands DLBD poison audio classification",
     "adhoc": {
         "compute_fairness_metrics": false,
+        "path_to_index_file": "./data_to_keep.pkl",
         "experiment_id": 0,
         "explanatory_model": null,
         "fraction_poisoned": 0.1,

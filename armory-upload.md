@@ -107,7 +107,7 @@ typically.
 
 To upload the saved image:
 
-    armory-upload GARD msw@example.com docker-image example-eval5-1.0.tar
+    armory-upload JHUM tthebau1@jh.edu docker-image example-eval5-1.0.tar
 
 In eval5 and onward we've improved the upload performance dramatically by
 removing an intermediate server. We've measured speeds of up to 2GB / minute which
