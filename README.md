@@ -163,3 +163,6 @@ Note: You might need to change ```variant_path``` [here](https://github.com/gard
 Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
 If you first run [OPTION A], it saves model to the location from where [OPTION B] is loading the model. 
 Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/poisoning_v0_audio_p10_jem_filter_load_model.json#L51) if the current working directory has changed.
+
+
+Note: File names having <code>*.eval6</code> are misnormers for <code>*eval7</code>. Please ignore the naming.
