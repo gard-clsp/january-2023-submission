@@ -66,8 +66,6 @@ List of scenarios:
 | -------------- | ----------------------------------------------------------------------|
 | SUBMISSION0    | Baseline Pytorch model (undefended)                                   |
 | SUBMISSION1    | DINO+KMeans+LDA Filtering defense                                     |
-| SUBMISSION2.1  | Sliding Joint Energy-based Model defense with model training          |
-| SUBMISSION2.2  | Sliding Joint Energy-based Model defense with loading model           |
 
 ##  SUBMISSION0 : Baseline Pytorch model (undefended)
 ```bash run_jhu_poisoning_submission0.sh```
@@ -92,74 +90,29 @@ $ docker cp dump_dir/* CONTAINER_NAME:/workspace/dump_dir
 ###  [Step II] Filter the poisoned examples
 This step must be done inside the docker container.
 
-There are two options for this step. [OPTION A] will re-train the DINO model from scratch, while [OPTION B] will use the model we already trained for the default scenario (10% of source class 11 poisoned with <code>clapping.wav</code> trigger to target class 2)
-
-#### [OPTION A] Retrain the DINO model
+#### Train the DINO model
 *in the docker*, run the filtering of the poisoned examples:
 ```bash
 $ cd /hyperion/egs/poison/dinossl.v1
-$ bash RUN_ALL.sh retrain
+$ bash RUN_ALL.sh scenario1 1 1 1
 ```
 This will use the data previously dumped in <code>/workspace/dump_dir</code>, and augment with the musan noise in <code>/workspace/musan</code>,
 to train a DINO network in a unsupervised way, produce DINO representations for the train dataset and filter them.
-The indices will be kept at a pickled list in <code>/workspace/scenario1.pkl</code> and <code>/workspace/scenario1_LDA.pkl</code>.
 
-#### [OPTION B] Load the DINO model (already trained) to save time
-As the training takes 25 to 30 hours, if you wish to use a previously trained network, one can be found here:
-```bash
-https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
-```
-You can use this to download it:
-```bash
-$ cd /hyperion/egs/poison/dinossl.v1/exp/xvector_nnets/fbank80_stmn_lresnet34_e256_do0_b48_amp.dinossl.v1
-$ gdown https://drive.google.com/u/0/uc?id=1KMnknps7PsjuBZ3GPcDdiSHTWN_l8fFQ&export=download
-```
+About the parameters:
+- scenario1 is the base name for the scenario, but you can train an evaluate multiple ones in parallel in the same docker, just change the name of the data dump, and use a different scenario name.
+- the first number is for the stage to start, they are 8 stages, if one crashes, you can start again at the wanted one using a different number. Dino training stage is the 6th, signature extraction is the 7th and computing the indexes to be removed is the 8th.
+- the second number is for the number of GPUs you want to use, we only tested them up to 4GPU.
+- the third number is optional, if you want to suppose 2 or more classes were simultaneously attacked, change this number.
 
-and then, run this instead, it will ignore the training of the network :
-
-```bash
-$ cd /hyperion/egs/poison/dinossl.v1
-$ bash RUN_ALL.sh no_train
-```
+The indices will be kept at a pickled lists in:
+- <code>/workspace/scenario1_all.pkl</code> for the 1-step filtering
+- <code>/workspace/scenario1_LDA_all.pkl</code> for the 2-step filtering with a LDA.
+- <code>/workspace/scenario1_LDA_n1.pkl</code> for the 2-step filtering with a LDA, removing only the majority class (this is our current best).
 
 ###  [Step III] Run the evaluation
 Finally, once we have the list of poisoned samples, we can run the evaluation.
 ```bash
-docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA.pkl data_to_keep.pkl
+docker cp JHUM_Armory_K2_Snowfall_Dockerfile:/workspace/scenario1_LDA_n1.pkl data_to_keep.pkl
 bash run_jhu_poisoning_submission1.sh
 ```
-
-<hr>
-
-## DEFENSE SUBMISSION2: Sliding Joint Energy-based Model defense
-
-### [OPTION A] Training the model
-```bash run_jhu_poisoning_submission2.1.sh```
-
-Trained model will be saved to: [scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/ckpt_26.pt](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/configs_defense_SlidingJEM_v1/ckpt_26.pt) <br>
-Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_v1.json#L42) if the current working directory has changed.
-
-### [OPTION B] Loading already trained model
-```bash run_jhu_poisoning_submission2.2.sh```
-
-Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
-If you first run [OPTION A], it saves model to the location from where [OPTION B] is loading the model. <br>
-Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_slidingJEM/poisoning_v0_audio_p10_jem_pytorch_load_model.json#L42) if the current working directory has changed.
-
-
-## DEFENSE SUBMISSION3: Combination of SUBMISSION1 and SUBMISSION2
-This defense applies filtering used in SUBMISSION1 and trains the model from SUBMISSION2. It expects file data_to_keep.pkl. If you didn’t run SUBMISSON1, follow steps until you obtain data_to_keep.pkl.
-
-### [OPTION A] Training the model
-```bash run_jhu_poisoning_submission3.1.sh```
-
-Trained model will be saved to [scenario_configs_eval6_v1/jhu_defense_jem_filtering/configs_defense_jem_filtering_v1/ckpt_26.pt](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/configs_defense_jem_filtering_v1/ckpt_26.pt) 
-<br>
-Note: You might need to change ```variant_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/poisoning_v0_audio_p10_jem_filter.json#L51) if the current working directory has changed.
-
-### [OPTION B] Loading already trained model
-```bash run_jhu_poisoning_submission3.2.sh```
-
-Evaluates already trained model (10% of source class 11 poisoned with clapping trigger, target class 2) <br>
-If you first run [OPTION A], it saves model to the location from where [OPTION B] is loading the model. 
-Note: You might need to change the ```model_path``` [here](https://github.com/gard-clsp/january-2023-submission/blob/main/scenario_configs_eval6_v1/jhu_defense_jem_filtering/poisoning_v0_audio_p10_jem_filter_load_model.json#L51) if the current working directory has changed.
